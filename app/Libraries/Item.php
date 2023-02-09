@@ -9,14 +9,12 @@ namespace App\Libraries;
 class Item
 {
     public $id;
-
     public $name;
     public $price;
     public $quantity;
     public $total;
     public $discountAmount;
     public $discountTitle;
-
     public $discount;
 
     public function __construct($id, $name, $price, $quantity = 1)
@@ -29,37 +27,37 @@ class Item
         $this->total = $price * $quantity;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
-    public function getDiscountAmount()
+    public function getDiscountAmount(): float
     {
         return $this->discountAmount;
     }
 
-    public function getTotal()
+    public function getTotal(): float
     {
         return $this->total;
     }
 
-    public function setDiscount(Discount $discount)
+    public function setDiscount(Discount $discount): void
     {
         if ($this->validateDiscount() === false) {
             throw new \Exception('已使用優惠折扣，並且無法加入優惠折扣');
@@ -79,7 +77,7 @@ class Item
         $this->setDiscountTitle($discount->name);
     }
 
-    private function setDiscountAmount($discountAmount)
+    private function setDiscountAmount($discountAmount): void
     {
         $this->discountAmount = $discountAmount;
         $this->total = ($this->price * $this->quantity) - $discountAmount;
@@ -88,7 +86,7 @@ class Item
         }
     }
 
-    private function setDiscountTitle(string $title = null)
+    private function setDiscountTitle(string $title = null): void
     {
         $this->discountTitle = $title;
     }
@@ -98,7 +96,7 @@ class Item
         return is_null($this->discountTitle);
     }
 
-    public function removeDiscount()
+    public function removeDiscount(): void
     {
         $this->discountAmount = 0;
         $this->discountTitle = null;
