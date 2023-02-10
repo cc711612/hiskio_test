@@ -9,26 +9,33 @@ namespace App\Http\Services\Users;
 use App\Http\Repositories\Users\UserApiRepository;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Str;
+use App\Http\Services\Abstracts\ServiceAbstract;
 
-class UserApiService
+class UserApiService extends ServiceAbstract
 {
-    public $user_repositry;
+    public $user_repository;
 
     private $guard = 'api';
 
-    public function __construct(UserApiRepository $userApiRepository)
-    {
-        $this->user_repositry = $userApiRepository;
+    public function __construct(
+        UserApiRepository $userApiRepository,
+    ) {
+        $this->user_repository = $userApiRepository;
     }
 
-    public function create($Data)
+    public function create($Data): void
     {
-        return $this->user_repositry->create($Data);
+        $userEntity = $this->user_repository->create($Data);
+        $userEntity->accounts()->firstOrCreate([
+            'user_id' => $userEntity->id,
+            'account' => sprintf("%s%s", Str::random(10), $userEntity->id),
+        ]);
     }
 
     public function login($Data): string|null
     {
-        $user = $this->user_repositry->getUserByEmail($Data['email']);
+        $user = $this->user_repository->getUserByEmail($Data['email']);
         #認證失敗
         if (!Auth::guard($this->guard)->attempt($Data)) {
             return null;

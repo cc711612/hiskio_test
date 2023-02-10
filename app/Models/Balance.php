@@ -7,12 +7,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Balance extends Model
 {
+    use SoftDeletes;
+
     const Table = "balances";
 
     protected $table = self::Table;
+
+    const BALANCE_TYPE_INCOME = 1;
+    const BALANCE_TYPE_EXPENSES = 2;
 
     protected $fillable = [
         'account_id',

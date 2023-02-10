@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\BalanceController;
 
 /*
@@ -20,7 +21,13 @@ Route::group(['as' => 'api.'], function () {
         Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])->name('register');
     });
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('/balance', [BalanceController::class, 'index'])->name('balance.index');
+        Route::group(['prefix' => 'accounts', 'as' => 'account.'], function () {
+            Route::get('/', [AccountController::class, 'index'])->name('index');
+            Route::get('/{account_id}', [AccountController::class, 'show'])->name('show');
+        });
+        Route::group(['prefix' => 'balances', 'as' => 'balance.'], function () {
+            Route::post('/{account_id}', [BalanceController::class, 'store'])->name('store');
+        });
     });
 });
 

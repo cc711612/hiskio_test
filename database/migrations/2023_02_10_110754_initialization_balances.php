@@ -22,6 +22,7 @@ class InitializationBalances extends Migration
             $table->float('amount')->commit('金額');
             $table->float('balance')->commit('餘額');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('account_id')->references('id')->on('accounts');
         });
 

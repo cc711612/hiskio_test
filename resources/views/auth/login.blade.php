@@ -34,7 +34,7 @@
                         if (res.status) {
                             alert("登入成功");
                             $.cookie("token", res.data.access_token,{ path: '/', expires: 1 });
-                            location.href = "{{route('balance.index')}}";
+                            location.href = "{{route('account.index')}}";
                         }
                         return false;
                     },

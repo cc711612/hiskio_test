@@ -1,17 +1,16 @@
 <?php
 /**
  * @Author: Roy
- * @DateTime: 2023/2/9 上午 11:03
+ * @DateTime: 2023/2/10 下午 09:02
  */
 
-namespace App\Http\Repositories\Abstracts;
+namespace App\Http\Services\Abstracts;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-abstract class RepositoryAbstract
+abstract class ServiceAbstract
 {
-    abstract protected function getEntity(): Model;
+    public $request = [];
 
     public function setRequest(array $request)
     {
@@ -34,8 +33,11 @@ abstract class RepositoryAbstract
         return Arr::get($this->getRequest(), $key);
     }
 
-    public function create(array $Data)
+    public function getDefaultResult(): array
     {
-        return $this->getEntity()->create($Data);
+        return [
+            'status'  => false,
+            'message' => null,
+        ];
     }
 }

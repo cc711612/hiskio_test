@@ -8,5 +8,5 @@ namespace App\Http\Repositories\Users\Contracts;
 
 interface UserApiRepositoryInterface
 {
-
+    function getUserByEmail(string $email);
 }
