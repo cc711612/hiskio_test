@@ -38,14 +38,14 @@ class LoginValidator extends ValidatorAbstracts
     protected function rules(): array
     {
         return [
+            'email'    => [
+                'required',
+                'exists:users,email',
+            ],
             'password' => [
                 'required',
                 'min:6',
                 'max:18',
-            ],
-            'email'    => [
-                'required',
-                'exists:users,email',
             ],
         ];
     }

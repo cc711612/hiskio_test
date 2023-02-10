@@ -6,7 +6,9 @@
 
 namespace App\Http\Controllers;
 
-class IndexController extends \Illuminate\Routing\Controller
+use Illuminate\Routing\Controller;
+
+class IndexController extends Controller
 {
     public function index()
     {

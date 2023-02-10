@@ -22,4 +22,12 @@ class UserApiRepository extends RepositoryAbstract implements UserApiRepositoryI
 
         return app(User::class);
     }
+
+    public function getUserByEmail(string $email)
+    {
+        // TODO: Implement getUserByEmail() method.
+        return $this->getEntity()
+            ->where('email', $email)
+            ->first();
+    }
 }

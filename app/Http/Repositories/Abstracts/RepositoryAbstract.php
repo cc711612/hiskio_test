@@ -39,4 +39,5 @@ abstract class RepositoryAbstract
         return $this->getEntity()->create($Data);
     }
 
+    abstract function getUserByEmail(string $email);
 }

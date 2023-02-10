@@ -35,15 +35,15 @@ class RegisterValidator extends ValidatorAbstracts
     protected function rules(): array
     {
         return [
-            'password' => [
-                'required',
-                'min:6',
-                'max:18',
-            ],
             'email'    => [
                 'required',
                 'email',
                 'unique:users,email',
+            ],
+            'password' => [
+                'required',
+                'min:6',
+                'max:18',
             ],
             'name'     => [
                 'required',
