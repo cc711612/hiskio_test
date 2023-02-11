@@ -8,16 +8,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Balance extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     const Table = "balances";
 
     protected $table = self::Table;
 
-    const BALANCE_TYPE_INCOME = 1;
+    const BALANCE_TYPE_INCOME   = 1;
     const BALANCE_TYPE_EXPENSES = 2;
 
     protected $fillable = [

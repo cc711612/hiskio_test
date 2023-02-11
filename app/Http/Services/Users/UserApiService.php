@@ -26,11 +26,7 @@ class UserApiService extends ServiceAbstract
 
     public function create($Data): void
     {
-        $userEntity = $this->user_repository->create($Data);
-        $userEntity->accounts()->firstOrCreate([
-            'user_id' => $userEntity->id,
-            'account' => sprintf("%s%s", Str::random(10), $userEntity->id),
-        ]);
+        $this->user_repository->create($Data);
     }
 
     public function login($Data): string|null

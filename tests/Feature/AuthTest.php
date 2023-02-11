@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use  WithFaker;
 
     /**
      * A basic feature test example.
@@ -40,6 +40,7 @@ class AuthTest extends TestCase
             'email'    => $email,
             'password' => $password,
         ]));
+
         $responseRegister->assertStatus(200);
 
         $responseLogin = $this->post(route('api.auth.login', [
