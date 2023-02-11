@@ -18,11 +18,16 @@ class BalanceFactory extends Factory
     public function definition()
     {
         $amount = rand(-100, 100);
+        $Account = Account::factory()->create();
         return [
             //
-            'account_id' => Account::factory()->create(),
+            'account_id' => $Account->id,
             'amount'     => $amount,
-            'balance'    => 0,
+            'balance'    => function (array $attributes) use ($Account,$amount) {
+                $Account->balance += $amount;
+                $Account->save();
+                return $Account->balance;
+            },
         ];
     }
 }

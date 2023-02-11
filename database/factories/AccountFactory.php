@@ -18,9 +18,10 @@ class AccountFactory extends Factory
      */
     public function definition()
     {
+        User::unsetEventDispatcher();
         return [
             //
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->create()->id,
             'account' => Str::random(10),
             'balance' => 0,
         ];
