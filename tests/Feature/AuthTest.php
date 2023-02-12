@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 
 class AuthTest extends TestCase
 {
@@ -42,20 +43,18 @@ class AuthTest extends TestCase
         ]));
 
         $responseRegister->assertStatus(200);
-//        $responseRegister->dump();
         $responseLogin = $this->post(route('api.auth.login', [
             'email'    => $email,
             'password' => $password,
         ]));
         $responseLogin->assertStatus(200);
-//        $responseLogin->dump();
     }
 
     private function getUserInfo()
     {
         return [
             'email'    => $this->faker()->email,
-            'password' => $this->faker()->password(10),
+            'password' => Str::random(10),
         ];
     }
 }
