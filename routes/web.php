@@ -14,6 +14,9 @@ use App\Http\Controllers\AccountController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return response()->redirectTo(route("auth.login"));
+});
 # 登入註冊相關
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
